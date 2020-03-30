@@ -6,8 +6,8 @@
  * @since 0.1.0
  */
 
-if( !class_exists( 'CAH_SPAStudioCPTTemplater' ) ) {
-    class CAH_SPAStudioCPTTemplater
+if( !class_exists( 'CAH_SPAEnsembleCPTTemplater' ) ) {
+    class CAH_SPAEnsembleCPTTemplater
     {
         // Prevents instantiation
         private function __construct() {}
@@ -38,8 +38,8 @@ if( !class_exists( 'CAH_SPAStudioCPTTemplater' ) ) {
          */
         public static function add( $template ) {
 
-            if( is_singular( 'studio' ) ) {
-                $template = CAH_SPA_STUDIO__PLUGIN_DIR . 'templates/single-spa_studio.php';
+            if( is_singular( 'ensemble' ) ) {
+                $template = CAH_SPA_ENSEMBLE__PLUGIN_DIR . 'templates/single-ensemble.php';
             }
 
             return $template;
@@ -60,9 +60,9 @@ if( !class_exists( 'CAH_SPAStudioCPTTemplater' ) ) {
         public static function load_scripts() {
             global $post;
 
-            if( 'studio' == $post->post_type ) {
-                wp_enqueue_style( 'cah-spa-studio-accordion-style', CAH_SPA_STUDIO__PLUGIN_DIR_URL . 'dist/css/accordion-style.css', [], CAH_SPA_STUDIO__VERSION, 'all' );
-                wp_enqueue_script( 'cah-spa-studio-script', CAH_SPA_STUDIO__PLUGIN_DIR_URL . 'dist/js/main.min.js', ['jquery'], CAH_SPA_STUDIO__VERSION, true );
+            if( 'ensemble' == $post->post_type ) {
+                wp_enqueue_style( 'cah-spa-ensemble-accordion-style', CAH_SPA_ENSEMBLE__PLUGIN_DIR_URL . 'dist/css/accordion-style.css', [], CAH_SPA_ENSEMBLE__VERSION, 'all' );
+                wp_enqueue_script( 'cah-spa-ensemble-script', CAH_SPA_ENSEMBLE__PLUGIN_DIR_URL . 'dist/js/main.min.js', ['jquery'], CAH_SPA_ENSEMBLE__VERSION, true );
             }
         }
     }

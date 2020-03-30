@@ -1,13 +1,13 @@
 <?php
 /**
- * Registers and manages the SPA Studio CPT.
+ * Registers and manages the SPA Ensemble CPT.
  * 
  * @author Mike W. Leavitt
  * @since 0.1.0
  */
 
-if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
-    class CAH_SPAStudioCPTRegistrar
+if( !class_exists( 'CAH_SPAEnsembleCPTRegistrar' ) ) {
+    class CAH_SPAEnsembleCPTRegistrar
     {
         // Prevents instantiation
         private function __construct() {}
@@ -17,7 +17,7 @@ if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
         // Public Methods
 
         /**
-         * Registers the Studio CPT and sets related editor actions.
+         * Registers the Ensemble CPT and sets related editor actions.
          * 
          * @author Mike W. Leavitt
          * @since 0.1.0
@@ -26,21 +26,21 @@ if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
          */
         public static function register() {
             // CPT labels
-            $labels = apply_filters( 'spa_studio_cpt_labels', array(
-                'singular'      => 'Studio',
-                'plural'        => 'Studios',
-                'text_domain'   => 'spa_studio_cpt',
+            $labels = apply_filters( 'spa_ensemble_cpt_labels', array(
+                'singular'      => 'Ensemble',
+                'plural'        => 'Ensembles',
+                'text_domain'   => 'spa_ensemble_cpt',
             ));
 
             // Registering the post type with WP
-            register_post_type( 'studio', self::_args( $labels ) );
+            register_post_type( 'ensemble', self::_args( $labels ) );
 
             // Add our new metabox to the editor
             //add_action( 'add_meta_boxes', [ __CLASS__, 'register_metabox' ], 10, 0 );
 
             // Point WP to our custom save function, so we can
             // store the new post metadata.
-            //add_action( 'save_post_studio', [ __CLASS__, 'save' ] );
+            //add_action( 'save_post_ensemble', [ __CLASS__, 'save' ] );
         }
 
 
@@ -61,19 +61,19 @@ if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
             //      - situations to show the box in
             //      - priority for box display
             add_meta_box(
-                'studio_sidebar',
+                'ensemble_sidebar',
                 'Right Sidebar',
                 [ __CLASS__, 'build' ],
-                'studio',
+                'ensemble',
                 'normal',
                 'low'
             );
 
             add_meta_box(
-                'studio_accordions',
+                'ensemble_accordions',
                 'Disciplines',
-                [ 'CAH_SPAStudioCPTEditor', 'build_accordion' ],
-                'studio',
+                [ 'CAH_SPAEnsembleCPTEditor', 'build_accordion' ],
+                'ensemble',
                 'normal',
                 'low'
             );
@@ -91,7 +91,7 @@ if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
         public static function build() {
             global $post;
 
-            $content = get_post_meta( $post->ID, 'spa-studio-sidebar-content', true );
+            $content = get_post_meta( $post->ID, 'spa-ensemble-sidebar-content', true );
 
             wp_editor( isset( $content ) ? $content : '', 'sidebar-content', [ 'textarea_rows' => 6] );
         }
@@ -112,7 +112,7 @@ if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
             if( !is_object( $post ) ) return;
 
             if( isset( $_POST['sidebar-content'] ) ) {
-                update_post_meta( $post->ID, 'spa-studio-sidebar-content', $_POST['sidebar-content'] );
+                update_post_meta( $post->ID, 'spa-ensemble-sidebar-content', $_POST['sidebar-content'] );
             }
         }
 
@@ -122,7 +122,7 @@ if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
         /**
          * Creates, filters, and returns the array of arguments to be 
          * passed to register_post_type() in 
-         * CAH_SPAStudioCPTRegistrar::register(), above.
+         * CAH_SPAEnsembleCPTRegistrar::register(), above.
          * 
          * @author Mike W. Leavitt
          * @since 0.1.0
@@ -136,9 +136,9 @@ if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
             $plural = $labels['plural'];
             $text_domain = $labels['text_domain'];
 
-            return apply_filters( 'spa_studio_cpt_args', array(
-                'label' => __( 'Studio', $text_domain ),
-                'description' => __( 'Studios', $text_domain ),
+            return apply_filters( 'spa_ensemble_cpt_args', array(
+                'label' => __( 'Ensemble', $text_domain ),
+                'description' => __( 'Ensembles', $text_domain ),
                 'labels' => self::_labels( $singular, $plural, $text_domain ),
                 'supports' => array( 'thumbnail', 'title', 'editor', 'custom-fields', 'page-attributes', 'post-formats' ),
                 'taxonomies' => self::_taxonomies(),
@@ -217,7 +217,7 @@ if( !class_exists( 'CAH_SPAStudioCPTRegistrar' ) ) {
          */
         private static function _taxonomies() : array {
             $tax = array();
-            $tax = apply_filters( 'spa_studio_cpt_taxonomies', $tax );
+            $tax = apply_filters( 'spa_ensemble_cpt_taxonomies', $tax );
 
             foreach( $tax as $t ) {
                 if( !taxonomy_exists( $t ) ) {

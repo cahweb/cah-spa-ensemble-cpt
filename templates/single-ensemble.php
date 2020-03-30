@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: SPA Studio CPT Single Page Template
- * Template Post Type: studio
+ * Template Name: SPA Ensemble CPT Single Page Template
+ * Template Post Type: ensemble
  */
 
 get_header();
@@ -39,7 +39,7 @@ the_post();
             <div class="row">
                 <div class="col-12 ml-2">
                 <?php
-                    $sidebar = get_post_meta( $post->ID, 'spa-studio-sidebar-content', true );
+                    $sidebar = get_post_meta( $post->ID, 'spa-ensemble-sidebar-content', true );
 
                     $sidebar = apply_filters( 'the_content', $sidebar );
 
