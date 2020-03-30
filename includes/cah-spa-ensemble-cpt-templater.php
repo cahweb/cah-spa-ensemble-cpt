@@ -60,6 +60,8 @@ if( !class_exists( 'CAH_SPAEnsembleCPTTemplater' ) ) {
         public static function load_scripts() {
             global $post;
 
+            if( !is_object( $post ) ) return;
+
             if( 'ensemble' == $post->post_type ) {
                 wp_enqueue_style( 'cah-spa-ensemble-accordion-style', CAH_SPA_ENSEMBLE__PLUGIN_DIR_URL . 'dist/css/accordion-style.css', [], CAH_SPA_ENSEMBLE__VERSION, 'all' );
                 wp_enqueue_script( 'cah-spa-ensemble-script', CAH_SPA_ENSEMBLE__PLUGIN_DIR_URL . 'dist/js/main.min.js', ['jquery'], CAH_SPA_ENSEMBLE__VERSION, true );

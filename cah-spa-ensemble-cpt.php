@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: CAH Studio CPT (SPA)
- * Description: A Custom Post Type for displaying information about ensembles for the School of Performing Arts
+ * Plugin Name: CAH Ensemble CPT (SPA)
+ * Description: A Custom Post Type for displaying information about ensembles for the School of Performing Arts. Based on the Studio CPT.
  * Author: Mike W. Leavitt
  * Version: 0.1.0
  */
