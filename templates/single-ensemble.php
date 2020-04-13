@@ -23,6 +23,26 @@ the_post();
             <div class="row">
                 <div class="col-12 ml-2">
                 <?php
+
+                    $sections = get_post_meta( $post->ID, 'spa-ensemble-link-sections', true );
+
+                    if( !empty( $sections ) ) {
+                        foreach( $sections as $i => $section ) {
+                        ?>
+                        <h2 class="h4"><span class="badge badge-default"><?= $section['name'] ?></span></h2>
+                        <ul class="list-group list-group-flush mb-4">
+                        <?php
+                            foreach( $section['links'] as $link ) {
+                            ?>
+                            <li class="list-group-item"><a href="<?= $link['href'] ?>" class="text-default"><?= $link['name'] ?></a></li>
+                            <?php
+                            }
+                        ?>
+                        </ul>
+                        <?php
+                        }
+                    }
+
                     $sidebar = get_post_meta( $post->ID, 'spa-ensemble-sidebar-content', true );
 
                     $sidebar = apply_filters( 'the_content', $sidebar );
